@@ -1,0 +1,17 @@
+requests==2.23.0
+pandas==1.0.3
+beautifulsoup4==4.8.2
+xlrd==1.2.0
+Keras==2.3.1
+tensorboard
+tensorflow
+streamlit==0.60.0
+sklearn==0.0
+np-utils==0.5.12.1
+matplotlib==3.2.1
+plotly==4.8.1
+xgboost==1.1.1
+statsmodels==0.11.1
+yellowbrick==1.1
+graphviz==0.14
+seaborn==0.10.1

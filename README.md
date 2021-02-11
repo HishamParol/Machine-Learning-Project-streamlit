@@ -1,10 +1,10 @@
-# Transcendence Project
+# Machine Learning  Project
 COMM055 - Machine Learning and Data Mining
 
 Group Members
 Amit Bechelet
-Donald James
 Hisham Parol
+Donald James
 Namra Sultan
 
 Datasets Used

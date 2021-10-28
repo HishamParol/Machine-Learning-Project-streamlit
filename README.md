@@ -1,11 +1,6 @@
 # Machine Learning  Project
-COMM055 - Machine Learning and Data Mining
+Machine Learning and Data Mining
 
-Group Members
-Amit Bechelet
-Hisham Parol
-Donald James
-Namra Sultan
 
 Datasets Used
 1. Robot

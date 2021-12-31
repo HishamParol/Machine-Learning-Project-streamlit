@@ -1,6 +1,6 @@
 # Machine Learning  Project 
 Machine Learning and Data Mining
-### Key tools and libraries: Jupyter notebook, Python, Keras, NumPy, scikit-learn, stremlit, matplotlib
+### Key tools and libraries: Jupyter notebook, Python flask framework, Keras, NumPy, scikit-learn, stremlit, matplotlib
 
 # Datasets Used
 1. Robot

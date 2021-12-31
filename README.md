@@ -170,7 +170,7 @@ Accuracy is a simple performance measure of correct predictions out of total pre
 and straightforward indication of the performance of a model. Accuracy has been applied to all 
 Robot and Airbnb classification problems.
 
-## Regress Performance
+## Regression Performance
 
 ### R2
 R-squared represents the proportion of the variance for a dependent variable which is explained by 
@@ -218,10 +218,10 @@ higher degree of accuracy of calculating an average price per room_type per neig
 relevancy of this derived figure to other variables. 
 The results of the OLS model show a high value for R-squared and Adjusted R-squared with 0.938.
 This shows that the variance of room_type, neighbourhood and neighbourhood_group explains the 
-variance in the average price very well. Similarly, the F-statistic value of 3318 in comparison to the pvalue of 0.00 shows this group of variables to be significant in predicting the average price of listings.
+variance in the average price very well. Similarly, the F-statistic value of 3318 in comparison to the p-value of 0.00 shows this group of variables to be significant in predicting the average price of listings.
 Results of the Decision Tree Regression performance were similar to OLS with R-squared value of 
 0.9866 showing again that the variance of the independent variables explains the variance in the 
-dependent variable. The MSE is 86.17 which seems quite high. However, taking into account Rsquared value and MAE of 4.09, suggests MSE is reasonable. It is therefore reasonable to conclude 
+dependent variable. The MSE is 86.17 which seems quite high. However, taking into account R-squared value and MAE of 4.09, suggests MSE is reasonable. It is therefore reasonable to conclude 
 that the model performs well.
 
 #### Airbnb Regression Conclusion 

@@ -31,3 +31,114 @@ be easily visualised and others through modelling.
 it?
 •What type of listings are there in New York City? (Private room, Apartment etc)
 
+# Data Preparation and Exploration
+## Airbnb 
+### Regression
+For the regression models, the price was calculated as average price per room_type per 
+neighbourhood. The following fields were dropped as they were not relevant to the problem or were 
+duplicated in other fields: id, name, host_name, latitude, longitude, reviews_per_month, 
+calculated_host_listings_count and availability_365. After visualising the features, it was clear that 
+these features did not have much influence on price and were therefore removed. Further 
+experimentation with host_id and number_of _reviews showed some relevance of these features 
+with the price, most number_of_reviews lied within the price range of 0-2000 and which hosts had 
+moderate/expensive listings
+### Classification
+There are no fields which contain evaluations of the listing, therefore the ‘number_of_reviews’ field 
+was chosen as a possible target variable with the assumption that if a property was to receive many 
+negative reviews, demand for that property would drop significantly and it would therefore not 
+receive many more reviews. When inspecting the data in this field it was obvious that the data was 
+very unbalanced.
+The lack of balance in this dataset proved a challenge and had to be dealt with in a number of ways –
+from data preparation to the choice of algorithm and validation to make sense of the data and 
+results of the models.
+Firstly, 20% of data points had no reviews at all. Also, there were a significant number of listings 
+where the date of the last review was a number of years ago. This suggested that these properties 
+were not active or were so unpopular that they were not relevant to the hypotheses. It was 
+therefore decided to drop all listings of 0 reviews and any, where the date of the last review was 
+prior to 2015. 
+The values of number_of_reviews field ranged from 0 < 630. It was necessary to split the data into 
+bins in order to deal with the lack of balance. Quartile bins, which are bins with equal number of 
+datapoints were created. However, using pandas qcut reduced the accuracy of the models. Using 
+pandas cut instead with boundaries of the bins limiting the number of data points similarly to 
+quartiles but by reducing the imbalance rather than eliminating it provided better accuracy results.
+This resulted in the following bins: 1-30, 31-50, 51-650. The categorical fields in the independent
+variables were then converted to binary data using one-hot encoding for passing to the models.
+The SMOTE function (Synthetic Minority Over-sampling Technique) was also used to address the 
+imbalance of the dataset. This function oversamples the minority class by using a set number of 
+nearest neighbours of in the minority class to create synthetic samples in that class. This resulted in 
+a very balanced dataset, but the models did not train well and underfitted
+
+## Algorithms
+### Classification
+#### Naïve Bayes
+Naïve Bayes classifies variables according to Bayes theorem with the assumption that variables are 
+independent. 
+The Robot dataset was assumed to be independent, so it would make sense to apply this algorithm.
+Algorithm parameters were left as default values.
+Although in the Airbnb dataset it was not clear where the features were independent or not, the 
+model was applied to the dataset.
+
+#### Decision Tree
+The Decision Tree algorithm was chosen as an algorithm which is generally good for most datasets. It 
+is particularly useful for cases where it is useful or sometimes essential to understand why a 
+particular decision was made by the model.
+For both Robot and Airbnb, the ccp_alpha value was set to 0.005 to perform minimal cost 
+complexity pruning. Random state was set to 5 to obtain a deterministic behaviour during fitting. All 
+other parameters were left as default.
+
+#### Perceptron
+The Perceptron algorithm is applied to binary classification of data. Once both datasets had been 1-
+hot encoded, this was an easy choice for a model. For Robot eta0 was set to 0.1 after experimenting 
+with a few values including the default = 1. Similarly, max_iter was set to 100 following 
+experimentations. Similar experimentations were conducted for Airbnb, however the algorithm 
+proved not best suited to this dataset.
+
+#### Multi-Layer Perceptron
+MLP is an effective algorithm for non-linear separable problems and therefore suitable for both 
+datasets. For the Robot several different parameter settings were tried until the optimum values were found 
+for suitable class separation. The number of hidden layers was set as 6; number of epochs = 500; 
+learning rate = 0.05.
+For Airbnb the MLP need to be adjusted, as a first step the train /test needed to be normalised. This
+improved the accuracy by 2%. Hidden layers were changed from 5 to 10 as well as max_iterations 
+from 100 to 1000. The activation function used was logistic because it improved the performance 
+when compared to the default = ‘relu’. It was therefore decided to use the same parameter settings 
+as for Robot.
+
+#### Support Vector Machine
+SVM is a linear classifier which learns an (n – 1)-dimensional classifier for classification of data into 
+two classes. SVM is more efficient for two class classification and both the Robot and Airbnb 
+datasets had more than 2 classes, and running the model proved how inappropriate it was for our 
+datasets as it performed very poorly, despite trying different parameters. SVM is also very efficient 
+for datasets with a large number of features. Neither datasets had a large number of features, with
+Robot dataset having 24/4 features and Airbnb having 16 features, another reason the model did 
+not perform well.
+
+#### XGBoost
+XGBoost (Extreme Gradient Boost) is decision tree ensemble algorithm with gradient boosting 
+framework. 
+Gradient boosting is a supervised learning algorithm, which attempts to accurately predict a target 
+variable by combining the estimates of a set of simpler, weaker models.
+The algorithm approaches the process of sequential tree building using parallelized implementation 
+and comes with built-in cross validation method at each iteration.
+
+#### Keras Neural Network
+The Keras Neural Network model was applied to the Robot dataset with the number of epochs 
+reduced to 200 and the number of hidden layer was set as 35 which gave a better performance 
+when compared to the MLP with 500 epochs and no 6 hidden layers(6 hidden layers gave the best 
+performance for MLP).
+
+#### Regression 
+Two regression models were applied to the Airbnb regression problem: OLS and Decision Tree 
+Regressor.
+
+#### OLS
+Ordinary Least Squares Regression model estimate the parameters in a regression model by 
+minimizing the sum of the squared residuals. 
+
+#### Decision Tree Regressor
+The regression decision tree works to fit a sine curve to learn local linear regressions which aim to fit 
+the sine curve. For Airbnb the max_depth was the only parameter, which was modified from the 
+default and set to 20 after some experimentation.
+
+
+

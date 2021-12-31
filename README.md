@@ -127,7 +127,7 @@ reduced to 200 and the number of hidden layer was set as 35 which gave a better 
 when compared to the MLP with 500 epochs and no 6 hidden layers(6 hidden layers gave the best 
 performance for MLP).
 
-#### Regression 
+### Regression 
 Two regression models were applied to the Airbnb regression problem: OLS and Decision Tree 
 Regressor.
 
@@ -140,5 +140,92 @@ The regression decision tree works to fit a sine curve to learn local linear reg
 the sine curve. For Airbnb the max_depth was the only parameter, which was modified from the 
 default and set to 20 after some experimentation.
 
+# Performance Metrics 
+Several different performance metrics were used to evaluate the models. 
 
+## ROC-AUC
+Receiver Operating Characteristic curve plots the false positive rate against the true positive rate and 
+shows how well the model is capable of distinguishing between the classes. ROC curves are used 
+when there are roughly equal numbers of observations for each class. For our models ROC curves 
+have been used to evaluate output of the models trained on the Robot dataset. 
 
+### Precision Recall Curve
+Precision-Recall curves plots the true positive rate against the positive predicted value and describes 
+how good the model is at predicting the positive class. Precision recall curve is better suited for use 
+when there is a moderate to large class imbalance, as there is in the Airbnb classification problem.
+
+### Confusion Matrix
+A confusion matrix is a table which describes the performance of a classification model by providing 
+a summary of prediction results. Many modelling evaluation metrics use the confusion matrix as the 
+basis for their metrics. Both Robot and Airbnb classifications were assessed with a confusion matrix.
+
+### K-fold Cross Validation
+K-fold cross validation is a method of checking the accuracy of a model’s ability to make predictions 
+on unseen data. K-fold tends to be less biased – that is less optimistic in its evaluation of a model 
+and allows all observations from the original dataset to appear in training and test sets. K-fold was 
+applied to both Robot and Airbnb classification problems with 10 folds
+
+## Accuracy
+Accuracy is a simple performance measure of correct predictions out of total predictions. It is a quick 
+and straightforward indication of the performance of a model. Accuracy has been applied to all 
+Robot and Airbnb classification problems.
+
+## Regress Performance
+
+### R2
+R-squared represents the proportion of the variance for a dependent variable which is explained by 
+independent variables. R-squared explains to what extent the variance of one variable explains the 
+variance of another variable.
+
+### MSE
+Mean Squared Error measures the average of the squares of errors between the estimated values 
+and what is estimated. This is a risk function corresponding to the expected value of the squared 
+error loss.
+
+### MAE
+Mean Absolute Error measures the average magnitude of the error in a set of predictions regardless 
+of the error direction – in other words taking the absolute value.
+
+# Results
+## Airbnb 
+### Classification
+The Airbnb dataset for classification problem was very unbalanced. Some steps were taken to 
+balance this dataset as discussed in Data Preparation and Exploration.
+Results of Naïve Bayes model for Airbnb accuracy were ~ 70%. This can be explained by a few 
+factors. The imbalanced dataset was a major factor, even though this was addressed to some extent 
+by using bins for the target variable. The variation in values within the bins was quite high and 
+therefore the results were not very meaningful.
+With the Decision Tree model the results were similar to Naïve Bayes, which was a bit unexpected
+with accuracy about 73%. It was assumed that the DT would be able to learn more about the 
+relationships between the variables and therefore be able to generalise better. 
+Results from the Perceptron model were as expected with accuracy for training data at 56% and test 
+data 51%. 
+The Multi-layer Perceptron performed better than Perceptron, with the conclusion that the extra 
+hidden layers and the extra learned weights contributed to a better model. However, like the results 
+of the other classification models for Airbnb MLP’s performance with accuracy of ~ 73% was 
+comparable.
+
+## Airbnb Classification Conclusion 
+The models’ accuracy explains how popular listings are, implying which hosts would be the busiest -
+by predicting the reviews_bins. However, the data distribution in reviews_bins was quite uneven, so 
+the predictions don’t give meaningful information. The main conclusions from the Airbnb classification problem is that this dataset is too unbalanced and attempts to balance hide any 
+relationships between variables, such as the variation of the values in bins was quite large and 
+minimised any relationship.
+
+### Regression
+Looking at Airbnb data as a regression problem proved more productive, this was largely due to 
+higher degree of accuracy of calculating an average price per room_type per neighbourhood and the 
+relevancy of this derived figure to other variables. 
+The results of the OLS model show a high value for R-squared and Adjusted R-squared with 0.938.
+This shows that the variance of room_type, neighbourhood and neighbourhood_group explains the 
+variance in the average price very well. Similarly, the F-statistic value of 3318 in comparison to the pvalue of 0.00 shows this group of variables to be significant in predicting the average price of listings.
+Results of the Decision Tree Regression performance were similar to OLS with R-squared value of 
+0.9866 showing again that the variance of the independent variables explains the variance in the 
+dependent variable. The MSE is 86.17 which seems quite high. However, taking into account Rsquared value and MAE of 4.09, suggests MSE is reasonable. It is therefore reasonable to conclude 
+that the model performs well.
+
+#### Airbnb Regression Conclusion 
+The models can accurately predict the price per neighbourhood explaining which neighbourhood 
+would be more expensive. The greater the accuracy on test data, the closer the predictions would be
+to the actual average price i.e. we can learn about the average prices of neighbourhoods by the 
+models’ predictions

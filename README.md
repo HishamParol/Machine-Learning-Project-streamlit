@@ -1,4 +1,4 @@
-# Machine Learning  Project
+# Machine Learning  Project (Jupyter Notebook)
 Machine Learning and Data Mining
 
 
